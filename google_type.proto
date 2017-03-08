@@ -1,0 +1,33 @@
+// Author: Tegan Burns-Berger
+
+syntax = "proto3";
+
+package google_type;
+
+message Color {
+
+
+    float red = 1;
+
+    float green = 2;
+
+    float blue = 3;
+
+    FloatValue alpha = 4;
+
+}
+
+message FloatValue {
+
+    float value = 1;
+
+}
+
+
+message LatLng {
+
+    double latitude = 1;
+
+    double longitude = 2;
+
+}

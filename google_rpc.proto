@@ -1,0 +1,66 @@
+// Author: Tegan Burns-Berger
+
+
+syntax = "proto3";
+
+package google_rpc;
+
+//import "google/protobuf/any.proto";
+
+enum Code {
+
+    OK = 0;
+
+    CANCELLED = 1;
+
+    UNKNOWN = 2;
+
+    INVALID_ARGUMENT = 3;
+
+    DEADLINE_EXCEEDED = 4;
+
+    NOT_FOUND = 5;
+
+    ALREADY_EXISTS = 6;
+
+    PERMISSION_DENIED = 7;
+
+    UNAUTHENTICATED = 8;
+
+    RESOURCE_EXHAUSTED = 9;
+
+    FAILED_PRECONDITION = 10;
+
+    ABORTED = 11;
+
+    OUT_OF_RANGE = 12;
+
+    UNIMPLEMENTED = 13;
+
+    INTERNAL = 14;
+
+    UNAVAILABLE = 15;
+
+    DATA_LOSS = 16;
+
+}
+
+
+message Status {
+
+    int32 code = 1;
+
+    string message = 2;
+
+    //repeated google.protobuf.Any details = 3;
+
+    Any details = 3;
+}
+
+message Any {
+
+    string type_url = 1;
+    
+    bytes value = 2;
+
+}
