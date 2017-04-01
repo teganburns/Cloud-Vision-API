@@ -8,14 +8,16 @@ LDFLAGS += -L/usr/local/lib -lgrpc++ \
 #LIBS=-lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio -lpthread
 #INC=~/Documents/Development/git/SMFL/include
 
-PROTO_TARGET=google_cloud_vision_v1
+PROTO_TARGET=Cloud-Vision-API
+GOOGLE_TYPE=google_type
+GOOGLE_RPC=google_rpc
 PROTO_PROTOC=protoc
 PROTO_PATH=.
 PROTO_PROTO=proto
 
-CPP_TARGET=main
+CPP_TARGET=cloud-vision-api
 
-GRPC_CPP_PLUGIN = grpc_cpp_plugin
+GRPC_CPP_PLUGIN=grpc_cpp_plugin
 GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
 
 PROTOS_PATH = .
@@ -26,18 +28,20 @@ vpath %.proto $(PROTOS_PATH)
 
 all: system-check main_cpp
 
-main_cpp: google_cloud_vision_v1.pb.o google_cloud_vision_v1.grpc.pb.o google_type.pb.o google_type.grpc.pb.o main.o
+#   $(GOOGLE_TYPE).pb.o $(GOOGLE_TYPE).grpc.pb.o  $(GOOGLE_RPC).pb.o $(GOOGLE_RPC).grpc.pb.o 
+main_cpp: $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o $(GOOGLE_TYPE).pb.o $(GOOGLE_RPC).pb.o $(CPP_TARGET).o
 	$(CXX) $^ $(LDFLAGS) $(LIBS) -o $@
 
 .PRECIOUS: %.grpc.pb.cc
 %.grpc.pb.cc: %.proto
-	$(PROTO_PROTOC) -I $(PROTOS_PATH) --grpc_out=. --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) google_cloud_vision_v1.proto google_type.proto
+	$(PROTO_PROTOC) -I $(PROTOS_PATH) --grpc_out=. --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $(PROTO_TARGET).proto
+
 .PRECIOUS: %.pb.cc
 %.pb.cc: %.proto
-	$(PROTO_PROTOC) -I $(PROTOS_PATH) --cpp_out=. google_cloud_vision_v1.proto google_type.proto
+	$(PROTO_PROTOC) -I $(PROTOS_PATH) --cpp_out=. $(PROTO_TARGET).proto $(GOOGLE_TYPE).proto $(GOOGLE_RPC).proto
 
 clean:
-	$(RM) $(CPP_TARGET)_cpp *.o *.pb.cc *.pb.h
+	$(RM) main_cpp *.o *.pb.cc *.pb.h
 
 
 

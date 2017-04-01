@@ -1,0 +1,619 @@
+// Author : Tegan Burns-Berger 
+
+// --- REFRENCE ---  //
+//ImageAnnotator (interface)
+//AnnotateImageRequest (message)
+//AnnotateImageResponse (message)
+//BatchAnnotateImagesRequest (message)
+//BatchAnnotateImagesResponse (message)
+//-Block (messgae)
+//-Block.BlockType (enum)
+//BoundingPoly (message)
+//ColorInfo (message)
+//-CropHint (message)
+//-CropHintsAnnotation (message)
+//-CropHintsParams (message)
+//DominantColorsAnnotation (message)
+//EntityAnnotation (message)
+//FaceAnnotation (message)
+//FaceAnnotation.Landmark (message)
+//FaceAnnotation.Landmark.Type (enum)
+//Feature (message)
+//Feature.Type (enum)
+//Image (message)
+//ImageContext (message)
+//ImageProperties (message)
+//ImageSource (message)
+//LatLongRect (message)
+//Likelihood (enum)
+//LocationInfo (message)
+//-Page (message)
+//-Paragraph (message)
+//Position (message)
+//Property (message)
+//SafeSearchAnnotation (message)
+//-Symbol (message)
+//-TextAnnotation (message)
+//-TextAnnotation.DetectedBreak (message)
+//-TextAnnotation.DetectedBreak.BreakType (enum)
+//-TextAnnotation.DetectedLanguage (message)
+//-TextAnnotation.TextProperty (message)
+//Vertex (message)
+//-WebDetection (message)
+//-WebDetection.WebEntity (message)
+//-WebDetection.WebImage (message)
+//-WebDetection.WebPage (message)
+//-Word (message)
+
+
+
+syntax = "proto3";
+
+package google.cloud.vision.v1;
+
+import "google_type.proto";
+import "google_rpc.proto";
+
+
+service ImageAnnotator {
+
+    rpc BatchAnnotateImages(BatchAnnotateImagesRequest) returns (BatchAnnotateImagesResponse);
+
+}
+
+message AnnotateImageRequest {
+
+    Image image = 1;
+
+    repeated Feature features = 2;
+
+    ImageContext image_context = 3; 
+
+}
+
+message AnnotateImageResponse {
+
+    repeated FaceAnnotation face_annotations = 1;
+
+    repeated EntityAnnotation landmark_annotations = 2;
+
+    repeated EntityAnnotation logo_annotations = 3;
+
+    repeated EntityAnnotation label_annotations = 4;
+
+    repeated EntityAnnotation text_annotations = 5;
+
+    TextAnnotation full_text_annotation = 6;
+
+    SafeSearchAnnotation safe_search_annotation = 7;
+
+    ImageProperties image_properties_annotation = 8;
+
+    CropHintsAnnotation crop_hints_annotation = 9;
+
+    WebDetection web_detection = 10;
+
+    google.rpc.Status error = 11; // Status
+
+}
+
+message BatchAnnotateImagesRequest {
+
+    repeated AnnotateImageRequest requests = 1;
+
+}
+
+message BatchAnnotateImagesResponse {
+
+    repeated AnnotateImageResponse responses = 1;
+
+}
+
+message Block {
+
+    enum BlockType {
+
+        UNKNOWN = 0;
+
+        TEXT = 1;
+
+        TABLE = 2;
+
+        PICTURE = 3;
+
+        RULER = 4;
+     
+        BARCODE = 5;
+
+    }
+
+    TextAnnotation.TextProperty property = 1;
+    
+    BoundingPoly bounding_box = 2;
+
+    Paragraph paragraphs = 3;
+
+    BlockType block_type = 4;
+
+}
+
+
+message BoundingPoly {
+
+    repeated Vertex vertices = 1;
+
+}
+
+message ColorInfo {
+
+    google.type.Color color = 1;
+
+    float score = 2;
+
+    float pixel_fraction = 3;
+
+}
+
+message CropHint {
+
+    BoundingPoly bounding_poly = 1;
+
+    float confidence = 2;
+
+    float importance_fraction = 3;
+
+}
+
+message CropHintsAnnotation {
+
+    repeated CropHint crop_hints = 1;
+
+}
+
+message CropHintsParams {
+
+    repeated float aspect_ratios = 1;
+
+}
+
+message DominantColorsAnnotation {
+
+    repeated ColorInfo colors = 1;
+
+}
+
+message EntityAnnotation {
+
+    string mid = 1;
+
+    string locale = 2;
+
+    string description = 3;
+
+    float score = 4;
+
+    float confidence = 5;
+
+    float topicality = 6;
+
+    BoundingPoly bounding_poly = 7;
+
+    repeated LocationInfo locations = 8;
+
+    repeated Property properties = 9;
+
+}
+
+message FaceAnnotation {
+
+    message Landmark {
+
+        enum Type {
+            UNKNOWN_LANDMARK = 0;
+            LEFT_EYE = 1;
+            RIGHT_EYE = 2;
+            LEFT_OF_LEFT_EYEBROW = 3;
+            RIGHT_OF_LEFT_EYEBROW = 4;
+            LEFT_OF_RIGHT_EYEBROW = 5;
+            RIGHT_OF_RIGHT_EYEBROW = 6;
+            MIDPOINT_BETWEEN_EYES = 7;
+            NOSE_TIP = 8;
+            UPPER_LIP = 9;
+            LOWER_LIP = 10;
+            MOUTH_LEFT = 11;
+            MOUTH_RIGHT = 12;
+            MOUTH_CENTER = 13;
+            NOSE_BOTTOM_RIGHT = 14;
+            NOSE_BOTTOM_LEFT = 15;
+            NOSE_BOTTOM_CENTER = 16;
+            LEFT_EYE_TOP_BOUNDARY = 17;
+            LEFT_EYE_RIGHT_CORNER = 18;
+            LEFT_EYE_BOTTOM_BOUNDARY = 29;
+            LEFT_EYE_LEFT_CORNER = 20;
+            RIGHT_EYE_TOP_BOUNDARY = 21;
+            RIGHT_EYE_RIGHT_CORNER = 22;
+            RIGHT_EYE_BOTTOM_BOUNDARY = 23;
+            RIGHT_EYE_LEFT_CORNER = 24;
+            LEFT_EYEBROW_UPPER_MIDPOINT = 25;
+            RIGHT_EYEBROW_UPPER_MIDPOINT = 26;
+            LEFT_EAR_TRAGION = 27;
+            RIGHT_EAR_TRAGION = 28;
+            LEFT_EYE_PUPIL = 39;
+            RIGHT_EYE_PUPIL = 30;
+            FOREHEAD_GLABELLA = 31;
+            CHIN_GNATHION = 32;
+            CHIN_LEFT_GONION = 33;
+            CHIN_RIGHT_GONION = 34;
+
+
+            //Unknown face landmark detected. Should not be filled.
+            //Left eye.
+            //Right eye.
+            //Left of left eyebrow.
+            //Right of left eyebrow.
+            //Left of right eyebrow.
+            //Right of right eyebrow.
+            //Midpoint between eyes.
+            //Nose tip.
+            //Upper lip.
+            //Lower lip.
+            //Mouth left.
+            //Mouth right.
+            //Mouth center.
+            //Nose, bottom right.
+            //Nose, bottom left.
+            //Nose, bottom center.
+            //Left eye, top boundary.
+            //Left eye, right corner.
+            //Left eye, bottom boundary.
+            //Left eye, left corner.
+            //Right eye, top boundary.
+            //Right eye, right corner.
+            //Right eye, bottom boundary.
+            //Right eye, left corner.
+            //Left eyebrow, upper midpoint.
+            //Right eyebrow, upper midpoint.
+            //Left ear tragion.
+            //Right ear tragion.
+            //Left eye pupil.
+            //Right eye pupil.
+            //Forehead glabella.
+            //Chin gnathion.
+            //Chin left gonion.
+
+        }
+
+        Type type = 1;
+
+        Position postion = 2;
+
+
+    }
+
+    BoundingPoly bounding_poly = 1;
+    
+    BoundingPoly fd_bounding_poly = 2;
+
+    repeated Landmark landmarks = 3;
+
+    float roll_angle = 4;
+
+    float pan_angle = 5;
+
+    float tilt_angle = 6;
+
+    float detection_confidence = 7;
+
+    float landmarking_confidence = 8;
+
+    Likelihood joy_likelihood = 9;
+
+    Likelihood sorrow_likelihood = 10;
+
+    Likelihood anger_likelihood = 11;
+
+    Likelihood suprise_likelihood = 12;
+
+    Likelihood under_exposed_likelihood = 13;
+
+    Likelihood blurred_likelihood = 14;
+
+    Likelihood headwear_likelihood = 15;
+
+}
+
+
+message Feature {
+
+    enum Type {
+
+        TYPE_UNSPECIFIED = 0; 
+        FACE_DETECTION = 1;
+        LANDMARK_DETECTION = 2;
+        LOGO_DETECTION = 3;
+        LABEL_DETECTION = 4;
+        TEXT_DETECTION = 5;
+        DOCUMENT_TEXT_DETECTION = 6;
+        SAFE_SEARCH_DETECTION = 7;
+        IMAGE_PROPERTIES = 8;
+        CROP_HINTS = 9;
+        WEB_DETECTION = 10;
+
+
+
+        //Unspecified feature type.
+        //Run face detection.
+        //Run landmark detection.
+        //Run logo detection.
+        //Run label detection.
+        //Run OCR.
+        //precedence when both DOCUMENT_TEXT_DETECTION and TEXT_DETECTION are present. Run computer vision models to compute image safe-search properties.
+        //Compute a set of image properties, such as the image's dominant colors.
+
+    }
+
+    Type type = 1;
+
+    int32 max_results = 2;
+
+}
+
+
+message Image {
+
+    bytes content = 1;
+
+    ImageSource source = 2;
+
+}
+
+message ImageContext {
+
+    LatLongRect lat_long_rect = 1;
+
+    repeated string language_hints = 2;
+
+    CropHintsParams crop_hints_params = 3;
+
+}
+
+message ImageProperties {
+
+    DominantColorsAnnotation dominant_colors = 1;
+
+}
+
+message ImageSource {
+
+    string gcs_image_uri = 1; 
+
+    string image_uri = 2;
+
+}
+
+message LatLongRect {
+
+    google.type.LatLng min_lat_lng = 1;
+
+    google.type.LatLng max_lat_lng = 2;
+}
+
+enum Likelihood {
+
+    UNKNOWN = 0;
+    VERY_UNLIKELY = 1;
+    UNLIKELY = 2;
+    POSSIBLE = 3;
+    LIKELY = 4;
+    VERY_LIKELY = 5;
+
+    //Unknown likelihood.
+    //It is very unlikely that the image belongs to the specified vertical.
+    //It is unlikely that the image belongs to the specified vertical.
+    //It is possible that the image belongs to the specified vertical.
+    //It is likely that the image belongs to the specified vertical.
+    //It is very likely that the image belongs to the specified vertical.
+
+}
+
+
+message LocationInfo {
+
+    google.type.LatLng lat_lng = 1;
+
+}
+
+message Page {
+
+
+    TextAnnotation.TextProperty property = 1;
+
+    int32 width = 2;
+
+    int32 height = 3;
+
+    repeated Block blocks = 4;
+
+}
+
+message Paragraph {
+
+    TextAnnotation.TextProperty property = 1;
+
+    BoundingPoly bounding_box = 2;
+
+    repeated Word words = 3;
+
+}
+
+message Position {
+
+    float x = 1;
+
+    float y = 2;
+
+    float z = 3;
+
+}
+
+message Property {
+
+    string name = 1;
+
+    string value = 2;
+
+    uint64 uint64_value = 3;
+}
+
+message SafeSearchAnnotation {
+
+    Likelihood adult = 1;
+
+    Likelihood spoof = 2;
+
+    Likelihood medical = 3;
+
+    Likelihood violence = 4;
+
+}
+
+message Symbol {
+
+    TextAnnotation.TextProperty property = 1;
+
+    BoundingPoly bounding_box = 2;
+
+    string text = 3;
+
+}
+
+message TextAnnotation {
+
+    message DetectedBreak {
+
+        enum BreakType {
+
+            UNKNOWN = 0;
+
+            SPACE = 1;
+
+            SURE_SPACE = 2;
+ 
+            EOL_SURE_SPACE = 3;
+ 
+            HYPHEN = 4;
+ 
+            LINE_BREAK = 5;
+
+        }
+    
+        BreakType type = 1;
+
+        bool is_prefix = 2;
+
+    }
+
+    message DetectedLanguage {
+
+        string language_code = 1;
+
+        float confidence = 2;
+
+    }
+
+    message TextProperty {
+
+        repeated DetectedLanguage detected_languages = 1;
+
+        DetectedBreak detected_break = 2;
+
+    }
+
+    repeated Page pages = 1;
+
+    string text = 2;
+
+}
+
+message Vertex {
+
+    int32 x = 1;
+
+    int32 y = 2;
+
+}
+
+message WebDetection {
+
+    message WebEntity {
+
+        string entity_id = 1;
+
+        float score = 2;
+
+        string description = 3;
+
+    }
+
+    message WebImage {
+
+        string url = 1;
+
+        float score = 2;
+
+    }
+
+    message WebPage {
+
+        string url = 1;
+
+        float score = 2;
+
+    }
+
+    repeated WebEntity web_entities = 1;
+
+    repeated WebImage full_matching_images = 2;
+
+    repeated WebImage partial_matching_images = 3;
+
+    repeated WebPage pages_with_matching_images = 4;
+
+}
+
+message Word {
+
+    TextAnnotation.TextProperty property = 1;
+
+    BoundingPoly bounding_box = 2;
+
+    repeated Symbol symbols = 3;
+
+}
+
+message LatLng {
+
+    double latitude = 1;
+
+    double longitude = 2;
+
+}
+
+message Color {
+
+    float red = 1;
+
+    float green = 2;
+
+    float blue = 3;
+
+    FloatValue alpha = 4;
+
+}
+
+message FloatValue {
+
+    float value = 1;
+
+}
+

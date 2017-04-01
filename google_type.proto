@@ -2,7 +2,7 @@
 
 syntax = "proto3";
 
-package google_type;
+package google.type;
 
 message Color {
 
