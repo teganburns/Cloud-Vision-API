@@ -26,10 +26,10 @@ PROTOS_PATH = .
 vpath %.proto $(PROTOS_PATH)
 
 
-all: system-check main_cpp
+all: system-check $(CPP_TARGET)
 
 #   $(GOOGLE_TYPE).pb.o $(GOOGLE_TYPE).grpc.pb.o  $(GOOGLE_RPC).pb.o $(GOOGLE_RPC).grpc.pb.o 
-main_cpp: $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o $(GOOGLE_TYPE).pb.o $(GOOGLE_RPC).pb.o $(CPP_TARGET).o
+$(CPP_TARGET): $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o $(GOOGLE_TYPE).pb.o $(GOOGLE_RPC).pb.o $(CPP_TARGET).o
 	$(CXX) $^ $(LDFLAGS) $(LIBS) -o $@
 
 .PRECIOUS: %.grpc.pb.cc
@@ -41,7 +41,7 @@ main_cpp: $(PROTO_TARGET).pb.o $(PROTO_TARGET).grpc.pb.o $(GOOGLE_TYPE).pb.o $(G
 	$(PROTO_PROTOC) -I $(PROTOS_PATH) --cpp_out=. $(PROTO_TARGET).proto $(GOOGLE_TYPE).proto $(GOOGLE_RPC).proto
 
 clean:
-	$(RM) main_cpp *.o *.pb.cc *.pb.h
+	$(RM) $(CPP_TARGET) *.o *.pb.cc *.pb.h
 
 
 
