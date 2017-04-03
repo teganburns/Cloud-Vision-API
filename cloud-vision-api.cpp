@@ -113,27 +113,70 @@ int main( int argc, char* argv[] ) {
         std::cout << "\n\n----Face Annotations----" << std::endl;
         std::cout << "Size: " << response.face_annotations_size() << std::endl;
         for ( int i = 0; i <  response.face_annotations_size(); i++ ) {
+
             if ( response.face_annotations( i ).has_bounding_poly() ) {
-                // mutable_bounding_poly();            
+                //response.face_annotation( i ).bounding_poly();
+                //response.face_annotation( i ).bounding_poly();
+                // TODO: finish boundingpoly //
             
             }
-            if ( response.face_annotations( i ).has_fd_bounding_poly( ) ) {
+
+            if ( response.face_annotations( i ).has_fd_bounding_poly() ) {
                 //response.face_annotations( 0 ).fd_bounding_poly();
                 std::cout << "FaceAnnotations: " << response.face_annotations( i ).has_fd_bounding_poly() << std::endl;
             }
 
-            /*
-            for ( int i = 0; i < response.face_annotations().landmarks_size(); i++ ) {
-                std::cout << "Landmarks Size: " << response.face_annotations().landmarks_size() << std::endl;
-                // response.face_annotations().landmarks( int index );
+            for ( int j = 0; j < response.face_annotations( i ).landmarks_size(); j++ ) {
+                //response.face_annotations( i ).landmarks( j ). // FaceAnnotation_Landmarks
+
+                std::cout << "FaceAnnotationLandmarkType: "
+                << FaceAnnotation_Landmark_Type_Name( response.face_annotations( i ).landmarks( j ).type() );
+                
+                if ( response.face_annotations( i ).landmarks( j ).has_position() ) {
+                    std::cout
+                    << "\tX: "
+                    << response.face_annotations( i ).landmarks( j ).position().x()
+                    << "\tY: "
+                    << response.face_annotations( i ).landmarks( j ).position().y()
+                    << "\tZ: "
+                    << response.face_annotations( i ).landmarks( j ).position().z();
+                
+                }
+                std::cout
+                << std::endl;
             
             }
             
-            std::cout << "Roll: " << response.face_annotations().roll_angle() << std::endl;
-            std::cout << "Pan: " << response.face_annotations().pan_angle() << std::endl;
-            std::cout << "Tilt: " << response.face_annotations().tilt_angle() << std::endl;
+            std::cout << "roll angle: "
+                << response.face_annotations( i ).roll_angle() // float
+                << "\npan angle: "
+                << response.face_annotations( i ).pan_angle() // float
+                << "\ntilt angle: "
+                << response.face_annotations( i ).tilt_angle() // float
+                << "\ndetection confidence: "
+                << response.face_annotations( i ).detection_confidence() // float
+                << "\nlandmarking confidence: "
+                << response.face_annotations( i ).landmarking_confidence() // float
+                << std::endl;
 
-            */
+            std::cout << "Alt Info:"
+                << "\n\tJoy: "
+                << Likelihood_Name( response.face_annotations( i ).joy_likelihood() )
+                << "\n\tSorrow: "
+                << Likelihood_Name( response.face_annotations( i ).sorrow_likelihood() )
+                << "\n\tAnger: "
+                << Likelihood_Name( response.face_annotations( i ).anger_likelihood() )
+                << "\n\tSuprise: "
+                << Likelihood_Name( response.face_annotations( i ).suprise_likelihood() )
+                << "\n\tUnder Exposed: "
+                << Likelihood_Name( response.face_annotations( i ).under_exposed_likelihood() )
+                << "\n\tBlured: "
+                << Likelihood_Name( response.face_annotations( i ).blurred_likelihood() )
+                << "\n\tHeadwear: "
+                << Likelihood_Name( response.face_annotations( i ).headwear_likelihood() )
+                << std::endl;
+
+
 
         }
 

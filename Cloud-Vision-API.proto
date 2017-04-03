@@ -285,7 +285,7 @@ message FaceAnnotation {
 
         Type type = 1;
 
-        Position postion = 2;
+        Position position = 2;
 
 
     }
