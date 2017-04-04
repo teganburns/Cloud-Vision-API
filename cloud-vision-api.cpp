@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <fstream>
 #include <typeinfo>
+#include <regex>
+
 
 using namespace std;
 
@@ -121,11 +123,33 @@ int main( int argc, char* argv[] ) {
     std::cout << "\n\n------ Responses ------" << std::endl;
     if ( status.ok() ) {
         std::cout << "Status returned OK\nResponses size: " << responses.responses_size() << std::endl;
-
         for ( int h = 0; h < responses.responses_size(); h++ ) {
             response = responses.responses( h );
 
+            // Response Error //
             std::cout << "Response has Error: " << response.has_error() << std::endl;
+            if ( response.has_error() ) {
+                std::cout
+                    << "Error Code: "
+                    << response.error().code()
+                    << "\nError Message: "
+                    << response.error().message()
+                    << "\nError Details: "
+                    << response.error().details().type_url()
+                    << std::endl;
+
+                std::cout << "Do you wish to continue?[y/n]...";
+                string input;
+                std::cin >> input;
+                if ( std::regex_match( input, std::regex( "y(?:es)?|1" ) ) ) {
+                    std::cout << "Continuing... " << std::endl;
+                } else {
+                    std::cout << "Breaking... " << std::endl;
+                    break;
+                
+                }
+            
+            }
 
             std::cout << "\n\n----Face Annotations----" << std::endl;
             std::cout << "Size: " << response.face_annotations_size() << std::endl;
@@ -591,24 +615,28 @@ int main( int argc, char* argv[] ) {
             std::cout << "\n\n----Image Properties Annotations----" << std::endl;
             if ( response.has_image_properties_annotation()  ) {
                 std::cout << response.has_image_properties_annotation() << std::endl; // ImageProperties
-                //response.image_properties_annotation(); // ImageProperties
-                response.image_properties_annotation().has_dominant_colors();
                 std::cout << "Dominant Colors: " << response.image_properties_annotation().has_dominant_colors() << std::endl;
-
-                //response.image_properties_annotation().dominant_colors(); // DominantColorsAnnotation
-                //response.image_properties_annotation().dominant_colors().colors_size(); // int
                 std::cout << "\tSize: " << response.image_properties_annotation().dominant_colors().colors_size() << std::endl;
+
                 for ( int i = 0; i <  response.image_properties_annotation().dominant_colors().colors_size(); i++ ) {
-                    //response.image_properties_annotation().dominant_colors().colors( int ); // ColorInfo
-                    //response.image_properties_annotation().dominant_colors().colors( i ).has_color();
                     std::cout << "Has Color: " << response.image_properties_annotation().dominant_colors().colors( i ).has_color() << std::endl;
-                    //response.image_properties_annotation().dominant_colors().colors( i ).color(); // Color
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().red(); // float
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().green(); // float
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().blue(); // float
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().has_alpha();
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().alpha(); // FloatValue
-                    response.image_properties_annotation().dominant_colors().colors( i ).color().alpha().value(); // float
+                    if ( response.image_properties_annotation().dominant_colors().colors( i ).has_color() ) {
+                        std::cout
+                            << "\trgb: "
+                            << response.image_properties_annotation().dominant_colors().colors( i ).color().red() // float
+                            << ","
+                            << response.image_properties_annotation().dominant_colors().colors( i ).color().green() // float
+                            << ","
+                            << response.image_properties_annotation().dominant_colors().colors( i ).color().blue() // float
+                            << std::endl;
+
+                            if ( response.image_properties_annotation().dominant_colors().colors( i ).color().has_alpha() ) {
+                                std::cout
+                                    << "\talpha: "
+                                    << response.image_properties_annotation().dominant_colors().colors( i ).color().alpha().value() // float
+                                    << std::endl;
+                            }
+                    }
 
                 }
 
@@ -624,7 +652,6 @@ int main( int argc, char* argv[] ) {
                     std::cout << "\tVertSize: " << response.crop_hints_annotation().crop_hints( i ).bounding_poly().vertices_size() << std::endl;
                     for ( int j = 0; j < response.crop_hints_annotation().crop_hints( i ).bounding_poly().vertices_size(); j++ ) {
                         std::cout << "\tVert: X: " << response.crop_hints_annotation().crop_hints( i ).bounding_poly().vertices( j ).x() << " Y: " << response.crop_hints_annotation().crop_hints( i ).bounding_poly().vertices( j ).y() << std::endl;
-                    
                     }
                 }
             } else { std::cout << "NONE" << std::endl; }
@@ -635,9 +662,14 @@ int main( int argc, char* argv[] ) {
                 
                 std::cout << "WebEntities: " << response.web_detection().web_entities_size() << std::endl;
                 for ( int i = 0; i < response.web_detection().web_entities_size(); i++ ) {
-                    response.web_detection().web_entities( i ).entity_id(); // string
-                    response.web_detection().web_entities( i ).score(); // float
-                    response.web_detection().web_entities( i ).description(); // string
+                    std::cout
+                        << "\tid: "
+                        << response.web_detection().web_entities( i ).entity_id() // string
+                        << "\n\tscore: "
+                        << response.web_detection().web_entities( i ).score() // float
+                        << "\n\tdescription: "
+                        << response.web_detection().web_entities( i ).description() // string
+                        << std::endl;
                 }
 
                 std::cout << "Full Matching Images: " << response.web_detection().full_matching_images_size() << std::endl;
@@ -691,5 +723,15 @@ int main( int argc, char* argv[] ) {
 
     return 0;
 }
+// -- User Spcific --
 // TODO: [GCS_URL] User Spcific, you will need to upload a picture to google cloud storageand replace the "gs://personal_projects/photo.jpg" with your gcs path. //
-// TODO: [FA_LANDMARK] FaceAnnotation_Landmark not returning data correctly //
+//
+// -- Issues -- 
+// TODO: [FA_LANDMARK] FaceAnnotation_Landmark not returning data correctly. FaceAnnotation_Landmark has landmarks, but returns UNKNOWN_LANDMARK (for type) with no position. // Try testing with other images //
+//
+//
+// -- Additional Features --
+// TODO: Allow the user to specify local images and convert them to base64. 
+//
+//
+//

@@ -1,0 +1,394 @@
+
+
+---- Checking Request ----
+Features size: 9
+Feature 0 name: FACE_DETECTION
+max results: 0
+Feature 1 name: LANDMARK_DETECTION
+max results: 0
+Feature 2 name: LOGO_DETECTION
+max results: 0
+Feature 3 name: LABEL_DETECTION
+max results: 0
+Feature 4 name: TEXT_DETECTION
+max results: 0
+Feature 5 name: SAFE_SEARCH_DETECTION
+max results: 0
+Feature 6 name: IMAGE_PROPERTIES
+max results: 0
+Feature 7 name: CROP_HINTS
+max results: 0
+Feature 8 name: WEB_DETECTION
+max results: 0
+Image Source: OK
+Request has Image: OK
+BatchRequests size: 1
+
+---- Sending Request ----
+Getting GoogleDefaultCredentials...DONE!
+Creating Channel...DONE!
+Getting Status...DONE!
+
+
+------ Responses ------
+Status returned OK
+Responses size: 1
+Response has Error: 1
+Error Code: 0
+Error Message: 
+Error Details: 
+Do you wish to continue?[y/n]...y
+Continuing... 
+
+
+----Face Annotations----
+Size: 1
+Has Bounding Poly: 1
+	vert: 966,163
+	vert: 1277,163
+	vert: 1277,524
+	vert: 966,524
+FD Bounding Poly: 1008,234
+FD Bounding Poly: 1238,234
+FD Bounding Poly: 1238,464
+FD Bounding Poly: 1008,464
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 0
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 1
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 2
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 3
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 4
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 5
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 6
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 7
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 8
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 9
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 10
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 11
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 12
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 13
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 14
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 15
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 16
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 17
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 18
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 19
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 20
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 21
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 22
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 23
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 24
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 25
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 26
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 27
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 28
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 29
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 30
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 31
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 32
+	NO POSITION
+FaceAnnotationLandmark: 
+	Type: UNKNOWN_LANDMARK
+	Value: 0
+	i: 0  j: 33
+	NO POSITION
+roll angle: 1.86051
+pan angle: -6.22966
+tilt angle: 12.7777
+detection confidence: 0.996405
+landmarking confidence: 0.697142
+Alt Info:
+	Joy: VERY_UNLIKELY
+	Sorrow: VERY_UNLIKELY
+	Anger: VERY_UNLIKELY
+	Suprise: VERY_UNLIKELY
+	Under Exposed: VERY_UNLIKELY
+	Blured: VERY_UNLIKELY
+	Headwear: VERY_UNLIKELY
+
+
+----Landmark Annotations----
+Size: 0
+
+
+----Logo Annotations----
+Size: 0
+
+
+----Label Annotations----
+Size: 5
+Label 0
+	mid: /m/068jd
+	locale: 
+	description: photograph
+	score: 0.932231
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 0
+	Locations: 0
+	Properties: 0
+Label 1
+	mid: /m/0ltfs
+	locale: 
+	description: bride
+	score: 0.856299
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 0
+	Locations: 0
+	Properties: 0
+Label 2
+	mid: /m/05wkw
+	locale: 
+	description: photography
+	score: 0.848781
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 0
+	Locations: 0
+	Properties: 0
+Label 3
+	mid: /m/01f43
+	locale: 
+	description: beauty
+	score: 0.815778
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 0
+	Locations: 0
+	Properties: 0
+Label 4
+	mid: /m/016c4t
+	locale: 
+	description: ceremony
+	score: 0.732967
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 0
+	Locations: 0
+	Properties: 0
+
+
+----Text Annotations----
+Size: 3
+Label 0
+	mid: 
+	locale: en
+	description: L.
+O
+
+	score: 0
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 1
+	Verticies: 4
+		vert 0: 852, 4
+		vert 1: 1231, 4
+		vert 2: 1231, 1278
+		vert 3: 852, 1278
+	Locations: 0
+	Properties: 0
+Label 1
+	mid: 
+	locale: 
+	description: L.
+	score: 0
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 1
+	Verticies: 4
+		vert 0: 855, 77
+		vert 1: 852, 8
+		vert 2: 927, 5
+		vert 3: 930, 74
+	Locations: 0
+	Properties: 0
+Label 2
+	mid: 
+	locale: 
+	description: O
+	score: 0
+	confidence: 0
+	topicality: 0
+	Has Bounding Poly: 1
+	Verticies: 4
+		vert 0: 1231, 1279
+		vert 1: 1210, 1279
+		vert 2: 1210, 1258
+		vert 3: 1231, 1258
+	Locations: 0
+	Properties: 0
+
+
+----Full Text Annotation----
+NONE
+
+
+----Safe Search Annotation----
+NONE
+
+
+----Image Properties Annotations----
+1
+Dominant Colors: 1
+	Size: 10
+Has Color: 1
+	rgb: 174,156,137
+Has Color: 1
+	rgb: 28,16,10
+Has Color: 1
+	rgb: 107,75,58
+Has Color: 1
+	rgb: 203,187,169
+Has Color: 1
+	rgb: 206,197,187
+Has Color: 1
+	rgb: 231,227,219
+Has Color: 1
+	rgb: 137,116,100
+Has Color: 1
+	rgb: 77,47,35
+Has Color: 1
+	rgb: 103,82,66
+Has Color: 1
+	rgb: 71,46,43
+
+
+----Crop Hints Annotations----
+Size: 0
+
+
+----Web Detection----
+NONE
+
+All Finished!
