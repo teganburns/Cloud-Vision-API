@@ -10,12 +10,6 @@ ALL projects  use  gRPC wich you can checkout at their [Main Website](http://www
 ## Usage
 
 ### Prerequisites
-To use this you need to install and configure the [Google Cloud SDK](https://cloud.google.com/sdk/).
-
-```
-Arch linux: 
-yaourt -S google-cloud-sdk
-```
 
 Install and configure [Protocol Buffers (proto3)](https://developers.google.com/protocol-buffers/) along with gRPC. The [Quickstart](http://www.grpc.io/docs/quickstart/cpp.html) section on grpc.io covers the installation/setup process in more detail. 
 
